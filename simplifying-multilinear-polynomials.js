@@ -24,27 +24,24 @@ Warning: the string in input can contain arbitrary variables represented by lowe
 */
 
 function simplify(poly){
-//   var reg=/-?\d*(\w+)/g;
-// 	var polyArr= poly.match(reg);
-// 	polyArr.forEach(function(item){
-// 		let temp=item.match(//g)
-// 		poly.search(/-?\d*()/g)
-// 	})
 	//sorting
+	var final=[];
 	poly= poly.match(/[-+]?\d*([a-z])+/gi).map(item=>{return  item.split('').sort().join('')}).join('');
 	console.log(poly);
 	poly.match(/[a-z]+/gi).sort().filter(function(item,index,arr){
 		return item===arr[index+1]?false:true;
-	}).forEach(function(item){
+	}).forEach(function(item,index){
 			let regexp=new RegExp("[-+]?\\d*[^a-z]"+item+"\\b","gi");
 			let sum=0;
 			poly.match(regexp).forEach(function(item1){
-				item1=item1.replace(/[a-z]+/g,'(1)');
-				console.log(parseInt(item1))
+				item1=item1.replace(/[a-z]+/g,'');
+				item1.length==1?item1=item1+'1':'';
+				sum=sum+parseInt(item1);
 			});
-			
+		index!=0?sum>0? sum='+'+sum:''   :''
+		sum!=0?final.push(sum+item):'';
 		});
-	
+	return final.sort(function(a,b){return a.length<b.length?false:true}).join('');
 }
 
 console.log(simplify('-a+5ba+3a-c-2a-4cba'))
