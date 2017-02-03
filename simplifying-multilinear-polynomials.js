@@ -32,9 +32,14 @@ function simplify(poly){
 // 	})
 	//sorting
 	poly= poly.match(/[-+]?\d*([a-z])+/gi).map(item=>{return  item.split('').sort().join('')}).join('');
-	return poly.match(/[a-z]+/gi).sort().filter(function(item,index,arr){
+	console.log(poly);
+	poly.match(/[a-z]+/gi).sort().filter(function(item,index,arr){
 		return item===arr[index+1]?false:true;
-	})
+	}).forEach(function(item){
+			let regexp=new RegExp("[-+]?\\d*[^a-z]"+item+"\\b","gi");
+			console.log(poly.match(regexp));
+			
+		});
 	
 }
 
