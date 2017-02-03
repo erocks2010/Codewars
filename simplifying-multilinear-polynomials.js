@@ -37,7 +37,11 @@ function simplify(poly){
 		return item===arr[index+1]?false:true;
 	}).forEach(function(item){
 			let regexp=new RegExp("[-+]?\\d*[^a-z]"+item+"\\b","gi");
-			console.log(poly.match(regexp));
+			let sum=0;
+			poly.match(regexp).forEach(function(item1){
+				item1=item1.replace(/[a-z]+/g,'(1)');
+				console.log(parseInt(item1))
+			});
 			
 		});
 	
