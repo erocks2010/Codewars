@@ -1,0 +1,35 @@
+var snail=function(array){
+        let res=[],i=0,j=array.reduce((acc,curr)=>acc+curr.length,0),k=0;
+        while(res.length!=j){
+            if(k==2){
+                k=0;
+                array=(array.reverse()).splice(1,array.length-2);
+            }
+            if(i==0 && array[i].length!=0){
+              res=res.concat(array[i]);
+                array[i].length=0;
+                i++;
+            }
+            else if((i==array.length-1) && array[i].length!=0){
+                res=res.concat(array[i].reverse());
+                array[i].length=0;
+                array.reverse();
+                i=0;
+                k++;
+            }
+            else if(i!=0 && i!=array.length-1){
+                res.push(array[i].pop());
+                array[i].reverse();
+                i++;
+            }
+            else{
+                if(i<array.length-1){
+                    i++
+                }
+                else{
+                    i=0;k++;
+                }
+            }
+        }
+        return res;
+    }
